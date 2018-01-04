@@ -39,9 +39,20 @@ func (r *Root) insert(keyword string) {
 			node = node.Children[j]
 			continue
 		}
-
-		node.childIndexMap[v] = len(node.Children)
-		node.Children = append(node.Children, CreateNode(v))
-		node = node.Children[node.childIndexMap[v]]
+		node = node.AddChildNode(v)
 	}
+}
+
+func (r *Root) Search(keyword string) (isFound bool) {
+	node := &r.Node
+	for _, v := range []rune(keyword) {
+		if j, ok := node.childIndexMap[v]; ok {
+			node = node.Children[j]
+			isFound = ok
+			continue
+		}
+		return false
+	}
+
+	return isFound
 }
