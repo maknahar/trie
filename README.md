@@ -6,4 +6,6 @@ Go Implementation of Trie Data Dtructure and it's *Applications*
 - Insert(keywords ...string)
 - Search(keyword string) (isFound bool)
 - SearchWithWordBoundary(keyword string) (isFound bool)
+- Delete(keyword string)
+
 
