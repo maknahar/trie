@@ -11,6 +11,15 @@ type Node struct {
 	IsEndOfWord bool
 }
 
+// CreateNode returns an initialized trie node
+func CreateNode(v rune) *Node {
+	return &Node{
+		Children:      make([]*Node, 0),
+		childIndexMap: make(map[rune]int),
+		Val:           v,
+	}
+}
+
 func (n *Node) AddChildNode(v rune) *Node {
 	n.childIndexMap[v] = len(n.Children)
 	n.Children = append(n.Children, CreateNode(v))

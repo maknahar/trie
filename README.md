@@ -5,6 +5,7 @@ Go Implementation of Trie Data Dtructure and it's *Applications*
 
 ## Trie
 
+- New() *Trai
 - Insert(keywords ...string)
 - Search(keyword string) (found bool)
 - SearchWithWordBoundary(keyword string) (found bool)
@@ -13,6 +14,7 @@ Go Implementation of Trie Data Dtructure and it's *Applications*
 
 ## Trie Node
 
+- CreateNode(val rune) *Node
 - AddChildNode(v rune) *Node
 - Len() int
 - IsLeafNode() bool
