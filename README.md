@@ -5,7 +5,7 @@ Go Implementation of Trie Data Dtructure and it's *Applications*
 
 ## Trie
 
-- New() *Trai
+- New() *Trie
 - Insert(keywords ...string)
 - Search(keyword string) (found bool)
 - SearchWithWordBoundary(keyword string) (found bool)
