@@ -34,9 +34,36 @@ func TestRoot_SearchWithWordBoundary(t *testing.T) {
 	ShouldBeEqual(t, 1, len(trie.Insert("mayank").Children))
 	ShouldBeEqual(t, 2, len(trie.Insert("patel").Children))
 	ShouldBeEqual(t, 3, len(trie.Insert("nahar").Children))
+	ShouldBeEqual(t, 3, len(trie.Insert("mayankpatel").Children))
 
 	ShouldBeEqual(t, false, trie.SearchWithWordBoundary("maya"))
 	ShouldBeEqual(t, false, trie.SearchWithWordBoundary("foo"))
 	ShouldBeEqual(t, true, trie.SearchWithWordBoundary("mayank"))
+	ShouldBeEqual(t, true, trie.SearchWithWordBoundary("patel"))
+	ShouldBeEqual(t, true, trie.SearchWithWordBoundary("mayankpatel"))
+
+}
+
+func TestRoot_Delete(t *testing.T) {
+	trie := New().Insert("mayank")
+
+	ShouldBeEqual(t, 1, len(trie.Children))
+	ShouldBeEqual(t, 1, len(trie.Insert("mayank").Children))
+	ShouldBeEqual(t, 2, len(trie.Insert("patel").Children))
+	ShouldBeEqual(t, 3, len(trie.Insert("nahar").Children))
+
+	ShouldBeEqual(t, true, trie.SearchWithWordBoundary("mayank"))
+	ShouldBeEqual(t, true, trie.SearchWithWordBoundary("patel"))
+
+	trie.Delete("maya")
+	ShouldBeEqual(t, true, trie.Search("mayank"))
+	ShouldBeEqual(t, true, trie.Search("patel"))
+	ShouldBeEqual(t, true, trie.SearchWithWordBoundary("mayank"))
+	ShouldBeEqual(t, true, trie.SearchWithWordBoundary("patel"))
+
+	trie.Delete("mayank")
+	ShouldBeEqual(t, false, trie.Search("mayank"))
+	ShouldBeEqual(t, true, trie.Search("patel"))
+	ShouldBeEqual(t, false, trie.SearchWithWordBoundary("mayank"))
 	ShouldBeEqual(t, true, trie.SearchWithWordBoundary("patel"))
 }

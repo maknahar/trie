@@ -71,3 +71,33 @@ func (r *Root) SearchWithWordBoundary(keyword string) (isFound bool) {
 
 	return isFound && node.IsEndOfWord
 }
+
+func (r *Root) Delete(keyword string) {
+	node := &r.Node
+	var breakNode *Node
+	var breakRune rune
+	for _, v := range []rune(keyword) {
+		if j, ok := node.childIndexMap[v]; ok {
+			if node.IsEndOfWord {
+				breakNode = node
+				breakRune = v
+			}
+
+			node = node.Children[j]
+			continue
+		}
+		return
+	}
+
+	if !node.IsEndOfWord {
+		return
+	}
+
+	if breakNode == nil {
+		breakNode = &r.Node
+		breakRune = []rune(keyword)[0]
+	}
+
+	breakNode.Children[breakNode.childIndexMap[breakRune]] = nil
+	delete(breakNode.childIndexMap, breakRune)
+}
