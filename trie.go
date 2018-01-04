@@ -82,7 +82,6 @@ func (r *Root) Delete(keyword string) {
 				breakNode = node
 				breakRune = v
 			}
-
 			node = node.Children[j]
 			continue
 		}
@@ -90,6 +89,11 @@ func (r *Root) Delete(keyword string) {
 	}
 
 	if !node.IsEndOfWord {
+		return
+	}
+
+	if !node.IsLeafNode() {
+		node.IsEndOfWord = false
 		return
 	}
 

@@ -16,3 +16,11 @@ func (n *Node) AddChildNode(v rune) *Node {
 	n.Children = append(n.Children, CreateNode(v))
 	return n.Children[n.childIndexMap[v]]
 }
+
+func (n *Node) Len() int {
+	return len(n.childIndexMap)
+}
+
+func (n *Node) IsLeafNode() bool {
+	return len(n.childIndexMap) == 0
+}
