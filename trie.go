@@ -41,6 +41,7 @@ func (r *Root) insert(keyword string) {
 		}
 		node = node.AddChildNode(v)
 	}
+	node.IsEndOfWord = true
 }
 
 func (r *Root) Search(keyword string) (isFound bool) {
@@ -55,4 +56,18 @@ func (r *Root) Search(keyword string) (isFound bool) {
 	}
 
 	return isFound
+}
+
+func (r *Root) SearchWithWordBoundary(keyword string) (isFound bool) {
+	node := &r.Node
+	for _, v := range []rune(keyword) {
+		if j, ok := node.childIndexMap[v]; ok {
+			node = node.Children[j]
+			isFound = ok
+			continue
+		}
+		return false
+	}
+
+	return isFound && node.IsEndOfWord
 }

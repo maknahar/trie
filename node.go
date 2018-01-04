@@ -5,6 +5,10 @@ type Node struct {
 	Children      []*Node
 	childIndexMap map[rune]int
 	Val           rune
+
+	// isEndOfWord is true if the node
+	// represents end of a word
+	IsEndOfWord bool
 }
 
 func (n *Node) AddChildNode(v rune) *Node {
