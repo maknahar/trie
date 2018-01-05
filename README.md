@@ -1,5 +1,5 @@
 # trie
-Go Implementation of Trie Data Dtructure and it's *Applications*
+Go Implementation of a Thread Safe Trie Data Dtructure and it's *Applications*
 
 # Supported Operation
 
@@ -18,3 +18,5 @@ Go Implementation of Trie Data Dtructure and it's *Applications*
 - AddChildNode(v rune) *Node
 - Len() int
 - IsLeafNode() bool
+- GetChildNode(v rune) (node *Node, exist bool)
+- DeleteChildNode(v rune)

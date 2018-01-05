@@ -24,6 +24,7 @@ func CreateNode(v rune) *Node {
 	}
 }
 
+// AddChildNode add child node with value v
 func (n *Node) AddChildNode(v rune) *Node {
 	n.m.Lock()
 	n.childIndexMap[v] = len(n.Children)
@@ -44,6 +45,7 @@ func (n *Node) IsLeafNode() bool {
 	return n.Len() == 0
 }
 
+// GetChildNode retrieve child node with value v.
 func (n *Node) GetChildNode(v rune) (node *Node, exist bool) {
 	n.m.RLock()
 	defer n.m.RUnlock()
@@ -54,6 +56,7 @@ func (n *Node) GetChildNode(v rune) (node *Node, exist bool) {
 	}
 }
 
+// DeleteChildNode Deletes the child node if it exist
 func (n *Node) DeleteChildNode(v rune) {
 	n.m.Lock()
 	defer n.m.Unlock()
