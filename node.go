@@ -26,10 +26,14 @@ func CreateNode(v rune) *Node {
 
 // AddChildNode add child node with value v
 func (n *Node) AddChildNode(v rune) *Node {
+	node, exist := n.GetChildNode(v)
+	if exist {
+		return node
+	}
 	n.m.Lock()
 	n.childIndexMap[v] = len(n.Children)
 	n.m.Unlock()
-	node := CreateNode(v)
+	node = CreateNode(v)
 	n.Children = append(n.Children, node)
 	return node
 }

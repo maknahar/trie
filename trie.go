@@ -26,10 +26,6 @@ func (r *Trie) Insert(keywords ...string) *Trie {
 func (r *Trie) insert(keyword string) {
 	node := &r.Node
 	for _, v := range []rune(keyword) {
-		if n, ok := node.GetChildNode(v); ok {
-			node = n
-			continue
-		}
 		node = node.AddChildNode(v)
 	}
 	node.IsEndOfWord = true
