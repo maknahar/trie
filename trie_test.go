@@ -11,6 +11,8 @@ func TestRoot_Insert(t *testing.T) {
 	ShouldBeEqual(t, 1, len(trie.Insert("mayank").Children))
 	ShouldBeEqual(t, 2, len(trie.Insert("patel").Children))
 	ShouldBeEqual(t, 3, len(trie.Insert("nahar").Children))
+
+	//Duplicate entry should not be created
 	ShouldBeEqual(t, 3, len(trie.Insert("mayank", "nahar").Children))
 }
 

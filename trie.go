@@ -6,7 +6,7 @@ type Trie struct {
 	Node
 }
 
-// Create returns an initialized trie root node
+// New Creates an initialized trie
 func New() *Trie {
 	return &Trie{
 		*CreateNode(0),
@@ -31,9 +31,10 @@ func (r *Trie) insert(keyword string) {
 	node.IsEndOfWord = true
 }
 
-func (r *Trie) Search(keyword string) (found bool) {
+// Search finds if keyword exist in trie as a keyword or its substring.
+func (r *Trie) Search(key string) (found bool) {
 	node := &r.Node
-	for _, v := range []rune(keyword) {
+	for _, v := range []rune(key) {
 		if n, ok := node.GetChildNode(v); ok {
 			node = n
 			found = ok
@@ -45,6 +46,7 @@ func (r *Trie) Search(keyword string) (found bool) {
 	return found
 }
 
+// SearchWithWordBoundary finds if keyword exist in trie as a fully qualified keyword
 func (r *Trie) SearchWithWordBoundary(keyword string) (found bool) {
 	node := &r.Node
 	for _, v := range []rune(keyword) {
@@ -59,6 +61,7 @@ func (r *Trie) SearchWithWordBoundary(keyword string) (found bool) {
 	return found && node.IsEndOfWord
 }
 
+// Delete deletes a keyword from a trie if keyword exist in trie
 func (r *Trie) Delete(keyword string) {
 	node := &r.Node
 	var breakNode *Node
