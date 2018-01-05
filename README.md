@@ -7,14 +7,13 @@ Go Implementation of a Thread Safe Trie Data Dtructure and it's *Applications*
 
 - New() *Trie
 - Insert(keywords ...string)
+- PrefixSearch(Key string) (found bool)
 - Search(keyword string) (found bool)
-- SearchWithWordBoundary(keyword string) (found bool)
 - Delete(keyword string)
-
 
 ## Trie Node
 
-- CreateNode(val rune) *Node
+- CreateNode(v rune) *Node
 - AddChildNode(v rune) *Node
 - Len() int
 - IsLeafNode() bool
