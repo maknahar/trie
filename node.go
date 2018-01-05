@@ -1,8 +1,11 @@
 package trie
 
+import "sync"
+
 type Node struct {
 	// list of all the children
 	Children      []*Node
+	m             *sync.RWMutex
 	childIndexMap map[rune]int
 	Val           rune
 
@@ -17,19 +20,43 @@ func CreateNode(v rune) *Node {
 		Children:      make([]*Node, 0),
 		childIndexMap: make(map[rune]int),
 		Val:           v,
+		m:             new(sync.RWMutex),
 	}
 }
 
 func (n *Node) AddChildNode(v rune) *Node {
+	n.m.Lock()
 	n.childIndexMap[v] = len(n.Children)
-	n.Children = append(n.Children, CreateNode(v))
-	return n.Children[n.childIndexMap[v]]
+	n.m.Unlock()
+	node := CreateNode(v)
+	n.Children = append(n.Children, node)
+	return node
 }
 
 func (n *Node) Len() int {
-	return len(n.childIndexMap)
+	n.m.RLock()
+	l := len(n.childIndexMap)
+	n.m.RUnlock()
+	return l
 }
 
 func (n *Node) IsLeafNode() bool {
-	return len(n.childIndexMap) == 0
+	return n.Len() == 0
+}
+
+func (n *Node) GetChildNode(v rune) (node *Node, exist bool) {
+	n.m.RLock()
+	defer n.m.RUnlock()
+	if i, ok := n.childIndexMap[v]; !ok {
+		return nil, false
+	} else {
+		return n.Children[i], true
+	}
+}
+
+func (n *Node) DeleteChildNode(v rune) {
+	n.m.Lock()
+	defer n.m.Unlock()
+	n.Children[n.childIndexMap[v]] = nil
+	delete(n.childIndexMap, v)
 }

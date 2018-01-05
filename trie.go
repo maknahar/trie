@@ -26,8 +26,8 @@ func (r *Trie) Insert(keywords ...string) *Trie {
 func (r *Trie) insert(keyword string) {
 	node := &r.Node
 	for _, v := range []rune(keyword) {
-		if j, ok := node.childIndexMap[v]; ok {
-			node = node.Children[j]
+		if n, ok := node.GetChildNode(v); ok {
+			node = n
 			continue
 		}
 		node = node.AddChildNode(v)
@@ -38,8 +38,8 @@ func (r *Trie) insert(keyword string) {
 func (r *Trie) Search(keyword string) (found bool) {
 	node := &r.Node
 	for _, v := range []rune(keyword) {
-		if j, ok := node.childIndexMap[v]; ok {
-			node = node.Children[j]
+		if n, ok := node.GetChildNode(v); ok {
+			node = n
 			found = ok
 			continue
 		}
@@ -52,8 +52,8 @@ func (r *Trie) Search(keyword string) (found bool) {
 func (r *Trie) SearchWithWordBoundary(keyword string) (found bool) {
 	node := &r.Node
 	for _, v := range []rune(keyword) {
-		if j, ok := node.childIndexMap[v]; ok {
-			node = node.Children[j]
+		if n, ok := node.GetChildNode(v); ok {
+			node = n
 			found = ok
 			continue
 		}
@@ -68,12 +68,12 @@ func (r *Trie) Delete(keyword string) {
 	var breakNode *Node
 	var breakRune rune
 	for _, v := range []rune(keyword) {
-		if j, ok := node.childIndexMap[v]; ok {
+		if n, ok := node.GetChildNode(v); ok {
 			if node.IsEndOfWord {
 				breakNode = node
 				breakRune = v
 			}
-			node = node.Children[j]
+			node = n
 			continue
 		}
 		return
@@ -93,6 +93,5 @@ func (r *Trie) Delete(keyword string) {
 		breakRune = []rune(keyword)[0]
 	}
 
-	breakNode.Children[breakNode.childIndexMap[breakRune]] = nil
-	delete(breakNode.childIndexMap, breakRune)
+	breakNode.DeleteChildNode(breakRune)
 }
