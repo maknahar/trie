@@ -1,5 +1,5 @@
-# trie
-Go Implementation of a Thread Safe Trie Data Dtructure and it's *Applications*
+# Trie
+Go Implementation of a Thread Safe Trie Data Structure and it's *Applications*
 
 # Supported Operation
 
@@ -20,3 +20,6 @@ Go Implementation of a Thread Safe Trie Data Dtructure and it's *Applications*
 - IsLeafNode() bool
 - GetChildNode(v rune) (node *Node, exist bool)
 - DeleteChildNode(v rune)
+
+
+Your ideas and suggestions are always welcome. Either in form of issues or PR.

@@ -38,6 +38,7 @@ func (n *Node) AddChildNode(v rune) *Node {
 	return node
 }
 
+// Len returns the number of children of node
 func (n *Node) Len() int {
 	n.m.RLock()
 	l := len(n.childIndexMap)
