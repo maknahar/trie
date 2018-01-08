@@ -1,6 +1,11 @@
 # Trie
 Go Implementation of a Thread Safe Trie Data Structure and it's *Applications*
 
+For documentation click [here][1].
+
+[1]: https://godoc.org/github.com/maknahar/trie
+
+
 # Supported Operation
 
 ## Trie
