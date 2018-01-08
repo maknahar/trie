@@ -15,16 +15,16 @@ func New() *Trie {
 
 // Insert allow one or more keyword to be inserted in trie
 // keyword can be any string
-func (r *Trie) Insert(keywords ...string) *Trie {
+func (t *Trie) Insert(keywords ...string) *Trie {
 	for _, v := range keywords {
-		r.insert(v)
+		t.insert(v)
 	}
 
-	return r
+	return t
 }
 
-func (r *Trie) insert(keyword string) {
-	node := &r.Node
+func (t *Trie) insert(keyword string) {
+	node := &t.Node
 	for _, v := range []rune(keyword) {
 		node = node.AddChildNode(v)
 	}
@@ -32,8 +32,8 @@ func (r *Trie) insert(keyword string) {
 }
 
 // PrefixSearch finds if keyword exist in trie as a fully qualified keyword.
-func (r *Trie) PrefixSearch(key string) (found bool) {
-	node := &r.Node
+func (t *Trie) PrefixSearch(key string) (found bool) {
+	node := &t.Node
 	for _, v := range []rune(key) {
 		if n, ok := node.GetChildNode(v); ok {
 			node = n
@@ -47,8 +47,8 @@ func (r *Trie) PrefixSearch(key string) (found bool) {
 }
 
 // Search finds if keyword exist in trie as a keyword or its substring
-func (r *Trie) Search(keyword string) (found bool) {
-	node := &r.Node
+func (t *Trie) Search(keyword string) (found bool) {
+	node := &t.Node
 	for _, v := range []rune(keyword) {
 		if n, ok := node.GetChildNode(v); ok {
 			node = n
@@ -62,8 +62,8 @@ func (r *Trie) Search(keyword string) (found bool) {
 }
 
 // Delete deletes a keyword from a trie if keyword exist in trie
-func (r *Trie) Delete(keyword string) {
-	node := &r.Node
+func (t *Trie) Delete(keyword string) {
+	node := &t.Node
 	var breakNode *Node
 	var breakRune rune
 	for _, v := range []rune(keyword) {
@@ -88,9 +88,26 @@ func (r *Trie) Delete(keyword string) {
 	}
 
 	if breakNode == nil {
-		breakNode = &r.Node
+		breakNode = &t.Node
 		breakRune = []rune(keyword)[0]
 	}
 
 	breakNode.DeleteChildNode(breakRune)
+}
+
+// DeleteBranch deletes all child after last letter of key if key exists in trie
+// If key is found, key will be treated as a keyword after this operation
+func (t *Trie) DeleteBranch(key string) {
+	node := &t.Node
+	for _, v := range []rune(key) {
+		if n, ok := node.GetChildNode(v); ok {
+			node = n
+			continue
+		}
+		return
+	}
+
+	node.childIndexMap = make(map[rune]int)
+	node.IsEndOfWord = true
+	node.Children = make([]*Node, 0)
 }

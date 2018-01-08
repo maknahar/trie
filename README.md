@@ -10,6 +10,7 @@ Go Implementation of a Thread Safe Trie Data Dtructure and it's *Applications*
 - PrefixSearch(Key string) (found bool)
 - Search(keyword string) (found bool)
 - Delete(keyword string)
+- DeleteBranch(key string)
 
 ## Trie Node
 

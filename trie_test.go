@@ -94,3 +94,17 @@ func TestRoot_Delete(t *testing.T) {
 	ShouldBeEqual(t, true, trie.Search("mayankpatel"))
 
 }
+
+func TestRoot_DeleteBranch(t *testing.T) {
+	trie := New().Insert("mayank")
+	ShouldBeEqual(t, 1, len(trie.Children))
+
+	ShouldBeEqual(t, true, trie.Search("mayank"))
+	ShouldBeEqual(t, true, trie.PrefixSearch("maya"))
+	ShouldBeEqual(t, false, trie.Search("maya"))
+
+	trie.DeleteBranch("maya")
+	ShouldBeEqual(t, false, trie.Search("mayank"))
+	ShouldBeEqual(t, true, trie.Search("maya"))
+	ShouldBeEqual(t, true, trie.PrefixSearch("maya"))
+}
