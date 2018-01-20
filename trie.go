@@ -1,3 +1,4 @@
+// Go Implementation of a Thread Safe Trie Data Structure and (some of) Trie Operations
 package trie
 
 // Trie Represent a node of trie

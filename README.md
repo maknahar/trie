@@ -6,8 +6,8 @@ trie := New().Insert("foo", "bar", "baz")
 
 trie.PrefixSearch("fo")                 // returns true
 trie.PrefixSearch("fb")                 // returns false
-trie.Search("fo")                           // returns false
-trie.Search("foo")                        // returns true
+trie.Search("fo")                       // returns false
+trie.Search("foo")                      // returns true
 
 ```
 
