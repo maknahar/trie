@@ -1,6 +1,16 @@
 # Trie
 Go Implementation of a Thread Safe Trie Data Structure and (some of) Trie *Operations*
 
+```
+trie := New().Insert("foo", "bar", "baz")
+
+trie.PrefixSearch("fo")                 // returns true
+trie.PrefixSearch("fb")                 // returns false
+trie.Search("fo")                           // returns false
+trie.Search("foo")                        // returns true
+
+```
+
 Code documentation can be found [here][1].
 
 [1]: https://godoc.org/github.com/maknahar/trie
@@ -32,7 +42,7 @@ Code documentation can be found [here][1].
 
     Delete deletes a keyword from a trie if keyword exist in trie
 
-- DeleteBranch(key string)
+- **DeleteBranch(key string)**
 
     DeleteBranch deletes all child after last letter of key if key
      exists in trie. If key is found, key will be treated as a keyword after this operation
