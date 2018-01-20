@@ -24,7 +24,7 @@ func CreateNode(v rune) *Node {
 	}
 }
 
-// AddChildNode add child node with value v
+// AddChildNode add child node to current node with value v
 func (n *Node) AddChildNode(v rune) *Node {
 	node, exist := n.GetChildNode(v)
 	if exist {
@@ -46,6 +46,7 @@ func (n *Node) Len() int {
 	return l
 }
 
+// IsLeafNode returns true if current node is a leaf node in Trie
 func (n *Node) IsLeafNode() bool {
 	return n.Len() == 0
 }

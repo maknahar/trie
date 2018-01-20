@@ -6,7 +6,7 @@ type Trie struct {
 	Node
 }
 
-// New Creates an initialized trie
+// New Creates an initialized trie data structure
 func New() *Trie {
 	return &Trie{
 		*CreateNode(0),
@@ -14,7 +14,7 @@ func New() *Trie {
 }
 
 // Insert allow one or more keyword to be inserted in trie
-// keyword can be any string
+// keyword can be any unicode string
 func (t *Trie) Insert(keywords ...string) *Trie {
 	for _, v := range keywords {
 		t.insert(v)
@@ -31,7 +31,7 @@ func (t *Trie) insert(keyword string) {
 	node.IsEndOfWord = true
 }
 
-// PrefixSearch finds if keyword exist in trie as a fully qualified keyword.
+// PrefixSearch checks if keyword exist in trie as a keyword or prefix to a keyword
 func (t *Trie) PrefixSearch(key string) (found bool) {
 	node := &t.Node
 	for _, v := range []rune(key) {
@@ -46,7 +46,7 @@ func (t *Trie) PrefixSearch(key string) (found bool) {
 	return found
 }
 
-// Search finds if keyword exist in trie as a keyword or its substring
+// Search checks if keyword exist in trie as a fully qualified keyword.
 func (t *Trie) Search(keyword string) (found bool) {
 	node := &t.Node
 	for _, v := range []rune(keyword) {
