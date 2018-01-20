@@ -9,26 +9,26 @@ Code documentation can be found [here][1].
 
 ## Operations on Trie Data Structure Level
 
-- New() *Trie
+- **New() \*Trie**
 
     Creates an initialized trie data structure
 
-- Insert(keywords ...string)
+- **Insert(keywords ...string)**
 
     Insert allow one or more keyword to be inserted in trie.
     keyword can be any valid Unicode string
 
-- PrefixSearch(Key string) (found bool)
+- **PrefixSearch(Key string) (found bool)**
 
     Search checks if keyword exist in trie as a keyword or prefix to
      keyword
 
-- Search(keyword string) (found bool)
+- **Search(keyword string) (found bool)**
 
     PrefixSearch checks if keyword exist in trie as a fully qualified
      keyword.
 
-- Delete(keyword string)
+- **Delete(keyword string)**
 
     Delete deletes a keyword from a trie if keyword exist in trie
 
@@ -40,27 +40,27 @@ Code documentation can be found [here][1].
 ## Operations on Node Level
 
 
-- CreateNode(v rune) *Node
+- **CreateNode(v rune) \*Node**
 
     CreateNode returns an initialized trie node
 
-- AddChildNode(v rune) *Node
+- **AddChildNode(v rune) \*Node**
 
     AddChildNode add child node to current node with value v
 
-- Len() int
+- **Len() int**
 
     Len returns the number of children for node
 
-- IsLeafNode() bool
+- **IsLeafNode() bool**
 
     IsLeafNode returns true if current node is a leaf node in Trie
 
-- GetChildNode(v rune) (node *Node, exist bool)
+- **GetChildNode(v rune) (node \*Node, exist bool)**
 
     GetChildNode retrieve child node with value v.
 
-- DeleteChildNode(v rune)
+- **DeleteChildNode(v rune)**
 
     DeleteChildNode Deletes the child node if it exist
 
